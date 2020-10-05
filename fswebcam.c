@@ -18,7 +18,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <locale.h>
-#include <gd.h>
+//#include <gd.h>
 #include <errno.h>
 #include <signal.h>
 #include <sys/types.h>
@@ -41,6 +41,14 @@
 #define FORMAT_JPEG (0)
 #define FORMAT_PNG  (1)
 #define FORMAT_WEBP (2)
+
+
+
+typedef struct _s2icodeimage {
+    unsigned int width;
+    unsigned int height;
+    unsigned char* data;
+} s2icodeimage;
 
 enum fswc_options {
 	OPT_VERSION = 128,
@@ -284,166 +292,11 @@ char *fswc_strduptime(char *src, time_t timestamp, int gmt)
 	return(NULL);
 }
 
-void fswc_DrawText(gdImagePtr im, char *font, double size,
-                   int x, int y, char align,
-                   uint32_t colour, char shadow, char *text)
-{
-	char *err;
-	int brect[8];
-	
-	if(!text) return;
-	
-	if(shadow)
-	{
-		uint32_t scolour = colour & 0xFF000000;
-		
-		fswc_DrawText(im, font, size, x + 1, y + 1,
-		              align, scolour, 0, text);
-	}
-	
-	/* Correct alpha value for GD. */
-	colour = (((colour & 0xFF000000) / 2) & 0xFF000000) +
-	         (colour & 0xFFFFFF);
-	
-	/* Pre-render the text. We use the results during alignment. */
-	err = gdImageStringFT(NULL, &brect[0], colour, font, size, 0.0, 0, 0, text);
-	if(err)
-	{
-		WARN("%s", err);
-		return;
-	}
-	
-	/* Adjust the coordinates according to the alignment. */
-	switch(align)
-	{
-	case ALIGN_CENTER: x -= brect[4] / 2; break;
-	case ALIGN_RIGHT:  x -= brect[4];     break;
-	}
-	
-	/* Render the text onto the image. */
-	gdImageStringFT(im, NULL, colour, font, size, 0.0, x, y, text);
-}
 
-int fswc_draw_overlay(fswebcam_config_t *config, char *filename, gdImage *image){
-	FILE *f;
-	gdImage *overlay;
-	
-	if(!filename) return(-1);
-	
-	f = fopen(filename, "rb");
-	if(!f)
-	{
-		ERROR("Unable to open '%s'", filename);
-		ERROR("fopen: %s", strerror(errno));
-		return(-1);
-	}
-	
-	overlay = gdImageCreateFromPng(f);
-	fclose(f);
-	
-	if(!overlay)
-	{
-		ERROR("Unable to read '%s'. Not a PNG image?", filename);
-		return(-1);
-	}
-	
-	gdImageCopy(image, overlay, 0, 0, 0, 0, overlay->sx, overlay->sy);
-	gdImageDestroy(overlay);
-	
-	return(0);
-}
-
-int fswc_draw_banner(fswebcam_config_t *config, gdImage *image)
-{
-	char timestamp[200];
-	int w, h;
-	int height;
-	int spacing;
-	int top;
-	int y;
-	
-	w = gdImageSX(image);
-	h = gdImageSY(image);
-	
-	/* Create the timestamp text. */
-	fswc_strftime(timestamp, 200, config->timestamp,
-	              config->start, config->gmt);
-	
-	/* Calculate the position and height of the banner. */
-	spacing = 4;
-	height = config->fontsize + (spacing * 2);
-	
-	if(config->subtitle || config->info)
-		height += config->fontsize * 0.8 + spacing;
-	
-	top = 0;
-	if(config->banner == BOTTOM_BANNER) top = h - height;
-	
-	/* Draw the banner line. */
-	if(config->banner == TOP_BANNER)
-	{
-		gdImageFilledRectangle(image,
-		                       0, height + 1,
-		                       w, height + 2,
-		                       config->bl_colour);
-	}
-	else
-	{
-		gdImageFilledRectangle(image,
-		                       0, top - 2,
-		                       w, top - 1,
-		                       config->bl_colour);
-	}
-	
-	/* Draw the background box. */
-	gdImageFilledRectangle(image,
-	   0, top,
-	   w, top + height,
-	   config->bg_colour);
-	
-	y = top + spacing + config->fontsize;
-	
-	/* Draw the title. */
-	fswc_DrawText(image, config->font, config->fontsize,
-	              spacing, y, ALIGN_LEFT,
-	              config->fg_colour, config->shadow, config->title);
-	
-	/* Draw the timestamp. */
-	fswc_DrawText(image, config->font, config->fontsize * 0.8,
-	              w - spacing, y, ALIGN_RIGHT,
-	              config->fg_colour, config->shadow, timestamp);
-	
-	y += spacing + config->fontsize * 0.8;
-	
-	/* Draw the sub-title. */
-	fswc_DrawText(image, config->font, config->fontsize * 0.8,
-	              spacing, y, ALIGN_LEFT,
-	              config->fg_colour, config->shadow, config->subtitle);
-	
-	/* Draw the info text. */
-	fswc_DrawText(image, config->font, config->fontsize * 0.7,
-	              w - spacing, y, ALIGN_RIGHT,
-	              config->fg_colour, config->shadow, config->info);
-	
-	return(0);
-}
-
-gdImage* fswc_gdImageDuplicate(gdImage* src)
-{
-	gdImage *dst;
-	
-	dst = gdImageCreateTrueColor(gdImageSX(src), gdImageSY(src));
-	if(!dst) return(NULL);
-	
-	gdImageCopy(dst, src, 0, 0, 0, 0, gdImageSX(src), gdImageSY(src));
-	
-	return(dst);
-}
-
-int fswc_output(fswebcam_config_t *config, char *name, gdImage *image)
+int fswc_output(fswebcam_config_t *config, char *name, s2icodeimage *image)
 {
 	char filename[FILENAME_MAX];
-	gdImage *im;
+	//gdImage *im;
 	FILE *f;
 	
 	if(!name) return(-1);
@@ -457,35 +310,18 @@ int fswc_output(fswebcam_config_t *config, char *name, gdImage *image)
 	              config->start, config->gmt);
 	
 	/* Create a temporary image buffer. */
-	im = fswc_gdImageDuplicate(image);
+	/*
+    im = fswc_gdImageDuplicate(image);
 	if(!im)
 	{
 		ERROR("Out of memory.");
 		return(-1);
 	}
+     */
 	
 	/* Draw the underlay. */
-	fswc_draw_overlay(config, config->underlay, im);
+	//fswc_draw_overlay(config, config->underlay, im);
 	
-	/* Draw the banner. */
-	if(config->banner != NO_BANNER)
-	{
-		char *err;
-		
-		/* Check if drawing text works */
-		err = gdImageStringFT(NULL, NULL, 0, config->font, config->fontsize, 0.0, 0, 0, "A");
-		
-		if(!err) fswc_draw_banner(config, im);
-		else
-		{
-			/* Can't load the font - display a warning */
-			WARN("Unable to load font '%s': %s", config->font, err);
-			WARN("Disabling the the banner.");
-		}
-	}
-	
-	/* Draw the overlay. */
-	fswc_draw_overlay(config, config->overlay, im);
 	
 	/* Write to a file if a filename was given, otherwise stdout. */
 	if(strncmp(name, "-", 2)) f = fopen(filename, "wb");
@@ -495,11 +331,12 @@ int fswc_output(fswebcam_config_t *config, char *name, gdImage *image)
 	{
 		ERROR("Error opening file for output: %s", filename);
 		ERROR("fopen: %s", strerror(errno));
-		gdImageDestroy(im);
+		//gdImageDestroy(im);
 		return(-1);
 	}
 	
 	/* Write the compressed image. */
+    /*
 	switch(config->format)
 	{
 	case FORMAT_JPEG:
@@ -519,10 +356,11 @@ int fswc_output(fswebcam_config_t *config, char *name, gdImage *image)
 		break;
 #endif
 	}
+     */
 	
 	if(f != stdout) fclose(f);
 	
-	gdImageDestroy(im);
+	//gdImageDestroy(im);
 	
 	return(0);
 }
@@ -569,8 +407,8 @@ int fswc_grab(fswebcam_config_t *config)
 	uint32_t frame;
 	uint32_t x, y;
 	avgbmp_t *abitmap, *pbitmap;
-	gdImage *image, *original;
-	uint8_t modified;
+	//gdImage *image, *original;
+    uint8_t modified;
 	src_t src;
 	
 	/* Record the start time. */
@@ -653,13 +491,6 @@ int fswc_grab(fswebcam_config_t *config)
 		/* Add frame to the average bitmap. */
 		switch(src.palette)
 		{
-		case SRC_PAL_PNG:
-			fswc_add_image_png(&src, abitmap);
-			break;
-		case SRC_PAL_JPEG:
-		case SRC_PAL_MJPEG:
-			fswc_add_image_jpeg(&src, abitmap);
-			break;
 		case SRC_PAL_S561:
 			fswc_add_image_s561(abitmap, src.img, src.length, src.width, src.height, src.palette);
 			break;
@@ -723,14 +554,15 @@ int fswc_grab(fswebcam_config_t *config)
 	HEAD("--- Processing captured image...");
 	
 	/* Copy the average bitmap image to a gdImage. */
-	original = gdImageCreateTrueColor(config->width, config->height);
+	/*
+    original = gdImageCreateTrueColor(config->width, config->height);
 	if(!original)
 	{
 		ERROR("Out of memory.");
 		free(abitmap);
 		return(-1);
 	}
-	
+	*/
 	pbitmap = abitmap;
 	for(y = 0; y < config->height; y++)
 		for(x = 0; x < config->width; x++)
@@ -743,19 +575,22 @@ int fswc_grab(fswebcam_config_t *config)
 			colour += (*(pbitmap++) / config->frames) << 8;
 			colour += (*(pbitmap++) / config->frames);
 			
-			gdImageSetPixel(original, px, py, colour);
+			//gdImageSetPixel(original, px, py, colour);
 		}
 	
 	free(abitmap);
 	
 	/* Make a copy of the original image. */
-	image = fswc_gdImageDuplicate(original);
+    /*
+
+    image = fswc_gdImageDuplicate(original);
 	if(!image)
 	{
 		ERROR("Out of memory.");
 		gdImageDestroy(image);
 		return(-1);
 	}
+     */
 	
 	/* Set the default values for this run. */
 	if(config->font) free(config->font);
@@ -796,12 +631,13 @@ int fswc_grab(fswebcam_config_t *config)
 		{
 		case 1: /* A non-option argument: a filename. */
 		case OPT_SAVE:
-			fswc_output(config, options, image);
+			//fswc_output(config, options, image);
 			modified = 0;
 			break;
 		case OPT_EXEC:
 			fswc_exec(config, options);
 			break;
+/*
 		case OPT_REVERT:
 			modified = 1;
 			gdImageDestroy(image);
@@ -980,11 +816,12 @@ int fswc_grab(fswebcam_config_t *config)
 			config->compression = atoi(options);
 			break;
 #endif
+ */
 		}
 	}
 	
-	gdImageDestroy(image);
-	gdImageDestroy(original);
+	//gdImageDestroy(image);
+	//gdImageDestroy(original);
 	
 	if(modified) WARN("There are unsaved changes to the image.");
 	
