@@ -6,8 +6,94 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		73556905252AE84C00CEE945 /* videodev2.h in Headers */ = {isa = PBXBuildFile; fileRef = 735568D6252AE84A00CEE945 /* videodev2.h */; };
+		73556906252AE84C00CEE945 /* src.h in Headers */ = {isa = PBXBuildFile; fileRef = 735568D7252AE84A00CEE945 /* src.h */; };
+		73556907252AE84C00CEE945 /* src_file.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568D8252AE84A00CEE945 /* src_file.c */; };
+		73556908252AE84C00CEE945 /* effects.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 735568D9252AE84A00CEE945 /* effects.o */; };
+		73556909252AE84C00CEE945 /* dec_rgb.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568DA252AE84A00CEE945 /* dec_rgb.c */; };
+		7355690A252AE84C00CEE945 /* dec_grey.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568DB252AE84A00CEE945 /* dec_grey.c */; };
+		7355690B252AE84C00CEE945 /* videodev.h in Headers */ = {isa = PBXBuildFile; fileRef = 735568DC252AE84A00CEE945 /* videodev.h */; };
+		7355690C252AE84C00CEE945 /* effects.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568DD252AE84A00CEE945 /* effects.c */; };
+		7355690D252AE84C00CEE945 /* dec_png.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568DE252AE84A00CEE945 /* dec_png.c */; };
+		7355690E252AE84C00CEE945 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 735568DF252AE84A00CEE945 /* Makefile */; };
+		7355690F252AE84C00CEE945 /* src_test.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568E0252AE84A00CEE945 /* src_test.c */; };
+		73556910252AE84C00CEE945 /* src_test.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 735568E1252AE84A00CEE945 /* src_test.o */; };
+		73556911252AE84C00CEE945 /* src_file.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 735568E3252AE84A00CEE945 /* src_file.o */; };
+		73556912252AE84C00CEE945 /* dec_jpeg.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568E4252AE84A00CEE945 /* dec_jpeg.c */; };
+		73556913252AE84C00CEE945 /* src.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 735568E6252AE84A00CEE945 /* src.o */; };
+		73556914252AE84C00CEE945 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 735568E7252AE84A00CEE945 /* log.h */; };
+		73556915252AE84C00CEE945 /* fswebcam.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 735568E9252AE84A00CEE945 /* fswebcam.o */; };
+		73556916252AE84C00CEE945 /* dec_s561.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568EA252AE84A00CEE945 /* dec_s561.c */; };
+		73556917252AE84C00CEE945 /* fswebcam.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568EB252AE84A00CEE945 /* fswebcam.c */; };
+		73556918252AE84C00CEE945 /* src_raw.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568EC252AE84B00CEE945 /* src_raw.c */; };
+		73556919252AE84C00CEE945 /* src_v4l1.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568ED252AE84B00CEE945 /* src_v4l1.c */; };
+		7355691A252AE84C00CEE945 /* parse.h in Headers */ = {isa = PBXBuildFile; fileRef = 735568EF252AE84B00CEE945 /* parse.h */; };
+		7355691B252AE84C00CEE945 /* src_raw.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 735568F1252AE84B00CEE945 /* src_raw.o */; };
+		7355691C252AE84C00CEE945 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 735568F2252AE84B00CEE945 /* config.h */; };
+		7355691D252AE84C00CEE945 /* dec.h in Headers */ = {isa = PBXBuildFile; fileRef = 735568F3252AE84B00CEE945 /* dec.h */; };
+		7355691E252AE84C00CEE945 /* dec_yuv.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568F4252AE84B00CEE945 /* dec_yuv.c */; };
+		7355691F252AE84C00CEE945 /* parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568F5252AE84B00CEE945 /* parse.c */; };
+		73556920252AE84C00CEE945 /* videodev_mjpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = 735568F7252AE84B00CEE945 /* videodev_mjpeg.h */; };
+		73556921252AE84C00CEE945 /* log.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 735568FA252AE84B00CEE945 /* log.o */; };
+		73556922252AE84C00CEE945 /* src.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568FB252AE84B00CEE945 /* src.c */; };
+		73556923252AE84C00CEE945 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = 735568FC252AE84C00CEE945 /* log.c */; };
+		73556924252AE84C00CEE945 /* effects.h in Headers */ = {isa = PBXBuildFile; fileRef = 735568FE252AE84C00CEE945 /* effects.h */; };
+		73556925252AE84C00CEE945 /* dec_bayer.c in Sources */ = {isa = PBXBuildFile; fileRef = 73556900252AE84C00CEE945 /* dec_bayer.c */; };
+		73556926252AE84C00CEE945 /* src_v4l2.c in Sources */ = {isa = PBXBuildFile; fileRef = 73556902252AE84C00CEE945 /* src_v4l2.c */; };
+		73556927252AE84C00CEE945 /* parse.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 73556903252AE84C00CEE945 /* parse.o */; };
+		73556928252AE84C00CEE945 /* fswebcam.h in Headers */ = {isa = PBXBuildFile; fileRef = 73556904252AE84C00CEE945 /* fswebcam.h */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		73556897252ABD0600CEE945 /* libfswebcam.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libfswebcam.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		735568D6252AE84A00CEE945 /* videodev2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = videodev2.h; sourceTree = "<group>"; };
+		735568D7252AE84A00CEE945 /* src.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = src.h; sourceTree = "<group>"; };
+		735568D8252AE84A00CEE945 /* src_file.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = src_file.c; sourceTree = "<group>"; };
+		735568D9252AE84A00CEE945 /* effects.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = effects.o; sourceTree = "<group>"; };
+		735568DA252AE84A00CEE945 /* dec_rgb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dec_rgb.c; sourceTree = "<group>"; };
+		735568DB252AE84A00CEE945 /* dec_grey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dec_grey.c; sourceTree = "<group>"; };
+		735568DC252AE84A00CEE945 /* videodev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = videodev.h; sourceTree = "<group>"; };
+		735568DD252AE84A00CEE945 /* effects.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = effects.c; sourceTree = "<group>"; };
+		735568DE252AE84A00CEE945 /* dec_png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dec_png.c; sourceTree = "<group>"; };
+		735568DF252AE84A00CEE945 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		735568E0252AE84A00CEE945 /* src_test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = src_test.c; sourceTree = "<group>"; };
+		735568E1252AE84A00CEE945 /* src_test.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = src_test.o; sourceTree = "<group>"; };
+		735568E2252AE84A00CEE945 /* fswebcam.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; path = fswebcam.1; sourceTree = "<group>"; };
+		735568E3252AE84A00CEE945 /* src_file.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = src_file.o; sourceTree = "<group>"; };
+		735568E4252AE84A00CEE945 /* dec_jpeg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dec_jpeg.c; sourceTree = "<group>"; };
+		735568E5252AE84A00CEE945 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
+		735568E6252AE84A00CEE945 /* src.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = src.o; sourceTree = "<group>"; };
+		735568E7252AE84A00CEE945 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
+		735568E8252AE84A00CEE945 /* example.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example.conf; sourceTree = "<group>"; };
+		735568E9252AE84A00CEE945 /* fswebcam.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = fswebcam.o; sourceTree = "<group>"; };
+		735568EA252AE84A00CEE945 /* dec_s561.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dec_s561.c; sourceTree = "<group>"; };
+		735568EB252AE84A00CEE945 /* fswebcam.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fswebcam.c; sourceTree = "<group>"; };
+		735568EC252AE84B00CEE945 /* src_raw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = src_raw.c; sourceTree = "<group>"; };
+		735568ED252AE84B00CEE945 /* src_v4l1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = src_v4l1.c; sourceTree = "<group>"; };
+		735568EE252AE84B00CEE945 /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
+		735568EF252AE84B00CEE945 /* parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parse.h; sourceTree = "<group>"; };
+		735568F0252AE84B00CEE945 /* configure */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = configure; sourceTree = "<group>"; };
+		735568F1252AE84B00CEE945 /* src_raw.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = src_raw.o; sourceTree = "<group>"; };
+		735568F2252AE84B00CEE945 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		735568F3252AE84B00CEE945 /* dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec.h; sourceTree = "<group>"; };
+		735568F4252AE84B00CEE945 /* dec_yuv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dec_yuv.c; sourceTree = "<group>"; };
+		735568F5252AE84B00CEE945 /* parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parse.c; sourceTree = "<group>"; };
+		735568F6252AE84B00CEE945 /* configure.ac */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = configure.ac; sourceTree = "<group>"; };
+		735568F7252AE84B00CEE945 /* videodev_mjpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = videodev_mjpeg.h; sourceTree = "<group>"; };
+		735568F8252AE84B00CEE945 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		735568F9252AE84B00CEE945 /* config.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.h.in; sourceTree = "<group>"; };
+		735568FA252AE84B00CEE945 /* log.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = log.o; sourceTree = "<group>"; };
+		735568FB252AE84B00CEE945 /* src.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = src.c; sourceTree = "<group>"; };
+		735568FC252AE84C00CEE945 /* log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = log.c; sourceTree = "<group>"; };
+		735568FD252AE84C00CEE945 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		735568FE252AE84C00CEE945 /* effects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = effects.h; sourceTree = "<group>"; };
+		735568FF252AE84C00CEE945 /* config.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.log; sourceTree = "<group>"; };
+		73556900252AE84C00CEE945 /* dec_bayer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dec_bayer.c; sourceTree = "<group>"; };
+		73556901252AE84C00CEE945 /* config.status */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = config.status; sourceTree = "<group>"; };
+		73556902252AE84C00CEE945 /* src_v4l2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = src_v4l2.c; sourceTree = "<group>"; };
+		73556903252AE84C00CEE945 /* parse.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = parse.o; sourceTree = "<group>"; };
+		73556904252AE84C00CEE945 /* fswebcam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fswebcam.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -15,6 +101,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73556910252AE84C00CEE945 /* src_test.o in Frameworks */,
+				73556921252AE84C00CEE945 /* log.o in Frameworks */,
+				7355691B252AE84C00CEE945 /* src_raw.o in Frameworks */,
+				73556911252AE84C00CEE945 /* src_file.o in Frameworks */,
+				73556913252AE84C00CEE945 /* src.o in Frameworks */,
+				73556915252AE84C00CEE945 /* fswebcam.o in Frameworks */,
+				73556908252AE84C00CEE945 /* effects.o in Frameworks */,
+				73556927252AE84C00CEE945 /* parse.o in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -24,6 +118,53 @@
 		7355688E252ABD0600CEE945 = {
 			isa = PBXGroup;
 			children = (
+				735568E5252AE84A00CEE945 /* CHANGELOG */,
+				735568F2252AE84B00CEE945 /* config.h */,
+				735568F9252AE84B00CEE945 /* config.h.in */,
+				735568FF252AE84C00CEE945 /* config.log */,
+				73556901252AE84C00CEE945 /* config.status */,
+				735568F0252AE84B00CEE945 /* configure */,
+				735568F6252AE84B00CEE945 /* configure.ac */,
+				73556900252AE84C00CEE945 /* dec_bayer.c */,
+				735568DB252AE84A00CEE945 /* dec_grey.c */,
+				735568E4252AE84A00CEE945 /* dec_jpeg.c */,
+				735568DE252AE84A00CEE945 /* dec_png.c */,
+				735568DA252AE84A00CEE945 /* dec_rgb.c */,
+				735568EA252AE84A00CEE945 /* dec_s561.c */,
+				735568F4252AE84B00CEE945 /* dec_yuv.c */,
+				735568F3252AE84B00CEE945 /* dec.h */,
+				735568DD252AE84A00CEE945 /* effects.c */,
+				735568FE252AE84C00CEE945 /* effects.h */,
+				735568D9252AE84A00CEE945 /* effects.o */,
+				735568E8252AE84A00CEE945 /* example.conf */,
+				735568E2252AE84A00CEE945 /* fswebcam.1 */,
+				735568EB252AE84A00CEE945 /* fswebcam.c */,
+				73556904252AE84C00CEE945 /* fswebcam.h */,
+				735568E9252AE84A00CEE945 /* fswebcam.o */,
+				735568FD252AE84C00CEE945 /* LICENSE */,
+				735568FC252AE84C00CEE945 /* log.c */,
+				735568E7252AE84A00CEE945 /* log.h */,
+				735568FA252AE84B00CEE945 /* log.o */,
+				735568DF252AE84A00CEE945 /* Makefile */,
+				735568EE252AE84B00CEE945 /* Makefile.in */,
+				735568F5252AE84B00CEE945 /* parse.c */,
+				735568EF252AE84B00CEE945 /* parse.h */,
+				73556903252AE84C00CEE945 /* parse.o */,
+				735568F8252AE84B00CEE945 /* README */,
+				735568D8252AE84A00CEE945 /* src_file.c */,
+				735568E3252AE84A00CEE945 /* src_file.o */,
+				735568EC252AE84B00CEE945 /* src_raw.c */,
+				735568F1252AE84B00CEE945 /* src_raw.o */,
+				735568E0252AE84A00CEE945 /* src_test.c */,
+				735568E1252AE84A00CEE945 /* src_test.o */,
+				735568ED252AE84B00CEE945 /* src_v4l1.c */,
+				73556902252AE84C00CEE945 /* src_v4l2.c */,
+				735568FB252AE84B00CEE945 /* src.c */,
+				735568D7252AE84A00CEE945 /* src.h */,
+				735568E6252AE84A00CEE945 /* src.o */,
+				735568F7252AE84B00CEE945 /* videodev_mjpeg.h */,
+				735568DC252AE84A00CEE945 /* videodev.h */,
+				735568D6252AE84A00CEE945 /* videodev2.h */,
 				73556898252ABD0600CEE945 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +184,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7355690B252AE84C00CEE945 /* videodev.h in Headers */,
+				73556914252AE84C00CEE945 /* log.h in Headers */,
+				7355691C252AE84C00CEE945 /* config.h in Headers */,
+				7355691D252AE84C00CEE945 /* dec.h in Headers */,
+				73556905252AE84C00CEE945 /* videodev2.h in Headers */,
+				73556924252AE84C00CEE945 /* effects.h in Headers */,
+				73556906252AE84C00CEE945 /* src.h in Headers */,
+				73556920252AE84C00CEE945 /* videodev_mjpeg.h in Headers */,
+				73556928252AE84C00CEE945 /* fswebcam.h in Headers */,
+				7355691A252AE84C00CEE945 /* parse.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +254,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7355690E252AE84C00CEE945 /* Makefile in Sources */,
+				7355690D252AE84C00CEE945 /* dec_png.c in Sources */,
+				73556909252AE84C00CEE945 /* dec_rgb.c in Sources */,
+				73556917252AE84C00CEE945 /* fswebcam.c in Sources */,
+				73556926252AE84C00CEE945 /* src_v4l2.c in Sources */,
+				73556907252AE84C00CEE945 /* src_file.c in Sources */,
+				73556919252AE84C00CEE945 /* src_v4l1.c in Sources */,
+				73556912252AE84C00CEE945 /* dec_jpeg.c in Sources */,
+				7355691E252AE84C00CEE945 /* dec_yuv.c in Sources */,
+				73556923252AE84C00CEE945 /* log.c in Sources */,
+				7355690C252AE84C00CEE945 /* effects.c in Sources */,
+				7355691F252AE84C00CEE945 /* parse.c in Sources */,
+				7355690A252AE84C00CEE945 /* dec_grey.c in Sources */,
+				73556916252AE84C00CEE945 /* dec_s561.c in Sources */,
+				73556922252AE84C00CEE945 /* src.c in Sources */,
+				73556918252AE84C00CEE945 /* src_raw.c in Sources */,
+				7355690F252AE84C00CEE945 /* src_test.c in Sources */,
+				73556925252AE84C00CEE945 /* dec_bayer.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
