@@ -103,7 +103,6 @@ enum fswc_options {
 	OPT_JPEG,
 	OPT_PNG,
 	OPT_WEBP,
-    OPT_RAW,
     OPT_BMP,
 	OPT_SAVE,
 	OPT_EXEC,
@@ -362,14 +361,6 @@ int fswc_output(fswebcam_config_t *config, char *name, s2icodeimage *image)
 		break;
 #endif
 #endif
-        case FORMAT_RAW:
-            MSG("Writing RAW image to '%s'.", filename);
-            MSG("image size: %d-%d ", image->width, image->height);
-            
-            fwrite(image->data, 1, image->width * image->height * 3, f);
-            fclose(f);
-            
-            break;
         case FORMAT_BMP:
             MSG("Writing BMP image to '%s'.", filename);
             MSG("image size: %d-%d ", image->width, image->height);
@@ -648,7 +639,7 @@ int fswc_grab(fswebcam_config_t *config)
 	config->underlay     = NULL;
 	config->overlay      = NULL;
 	config->filename     = NULL;
-	config->format       = FORMAT_BMP;
+	config->format       = FORMAT_PNG;
 	config->compression  = -1;
 	
 	modified = 1;
@@ -849,11 +840,6 @@ int fswc_grab(fswebcam_config_t *config)
 			break;
 #endif
  */
-		case OPT_RAW:
-			modified = 1;
-			MSG("Setting output format to RAW, quality");
-			config->format = FORMAT_RAW;
-			break;
 		case OPT_BMP:
 			modified = 1;
 			MSG("Setting output format to BMP, quality");
@@ -1306,7 +1292,6 @@ int fswc_getopts(fswebcam_config_t *config, int argc, char *argv[])
 #ifdef HAVE_WEBP
 		{"webp",            required_argument, 0, OPT_WEBP},
 #endif
-        {"raw",             no_argument, 0, OPT_RAW},
         {"bmp",             no_argument, 0, OPT_BMP},
 		{"save",            required_argument, 0, OPT_SAVE},
 		{"exec",            required_argument, 0, OPT_EXEC},
