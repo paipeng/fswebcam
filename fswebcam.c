@@ -102,6 +102,8 @@ enum fswc_options {
 	OPT_JPEG,
 	OPT_PNG,
 	OPT_WEBP,
+    OPT_RAW,
+    OPT_BMP,
 	OPT_SAVE,
 	OPT_EXEC,
 	OPT_DUMPFRAME,
@@ -1287,6 +1289,8 @@ int fswc_getopts(fswebcam_config_t *config, int argc, char *argv[])
 #ifdef HAVE_WEBP
 		{"webp",            required_argument, 0, OPT_WEBP},
 #endif
+        {"raw",             required_argument, 0, OPT_RAW},
+        {"bmp",             required_argument, 0, OPT_BMP},
 		{"save",            required_argument, 0, OPT_SAVE},
 		{"exec",            required_argument, 0, OPT_EXEC},
 		{0, 0, 0, 0}
