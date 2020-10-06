@@ -1044,6 +1044,7 @@ int fswc_usage()
 #ifdef HAVE_WEBP
 	       "     --webp <factor>          Outputs a WEBP image. (-1, 0 - 100)\n"
 #endif
+           "     --bmp           Outputs a BMP image. (-1, 0 - 9)\n"
 	       "     --save <filename>        Save image to file.\n"
 	       "     --exec <command>         Execute a command and wait for it to complete.\n"
 	       "\n");
