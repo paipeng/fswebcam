@@ -364,6 +364,9 @@ int fswc_output(fswebcam_config_t *config, char *name, s2icodeimage *image)
         case FORMAT_RAW:
             MSG("Writing RAW image to '%s'.", filename);
             MSG("image size: %d-%d ", image->width, image->height);
+            
+            fwrite(image->data, 1, image->width * image->height * 3, f);
+            
             break;
         case FORMAT_BMP:
             MSG("Writing BMP image to '%s'.", filename);
