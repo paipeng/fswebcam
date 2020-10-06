@@ -29,6 +29,7 @@
 #include "dec.h"
 #include "effects.h"
 #include "parse.h"
+#include "s2iuubmp.h"
 
 #define ALIGN_LEFT   (0)
 #define ALIGN_CENTER (1)
@@ -366,16 +367,19 @@ int fswc_output(fswebcam_config_t *config, char *name, s2icodeimage *image)
             MSG("image size: %d-%d ", image->width, image->height);
             
             fwrite(image->data, 1, image->width * image->height * 3, f);
+            fclose(f);
             
             break;
         case FORMAT_BMP:
             MSG("Writing BMP image to '%s'.", filename);
             MSG("image size: %d-%d ", image->width, image->height);
+            fclose(f);
+            s2iWriteBMPcolor(filename, image->data, image->width, image->height, image->width);
             break;
 	}
      
 	
-	if(f != stdout) fclose(f);
+	//if(f != stdout) fclose(f);
 	
 	//gdImageDestroy(im);
 	
@@ -598,12 +602,12 @@ int fswc_grab(fswebcam_config_t *config)
 			colour += (*(pbitmap++) / config->frames) << 8;
 			colour += (*(pbitmap++) / config->frames);
 #endif
-			codeimage->data[x + y*codeimage->width] = (*(pbitmap++) / config->frames);
-            codeimage->data[x + y*codeimage->width+1] = (*(pbitmap++) / config->frames);
-            codeimage->data[x + y*codeimage->width+2] = (*(pbitmap++) / config->frames);
+			codeimage->data[x*3 + y*codeimage->width*3] = (*(pbitmap++) / config->frames);
+            codeimage->data[x*3 + y*codeimage->width*3+1] = (*(pbitmap++) / config->frames);
+            codeimage->data[x*3 + y*codeimage->width*3+2] = (*(pbitmap++) / config->frames);
 
             
-			//gdImageSetPixel(original, px, py, colour);
+			//gdImageSetPixel(original, px*3, py, colour);
 		}
 	
 	free(abitmap);
@@ -644,7 +648,7 @@ int fswc_grab(fswebcam_config_t *config)
 	config->underlay     = NULL;
 	config->overlay      = NULL;
 	config->filename     = NULL;
-	config->format       = FORMAT_RAW;
+	config->format       = FORMAT_BMP;
 	config->compression  = -1;
 	
 	modified = 1;
@@ -845,6 +849,16 @@ int fswc_grab(fswebcam_config_t *config)
 			break;
 #endif
  */
+		case OPT_RAW:
+			modified = 1;
+			MSG("Setting output format to RAW, quality");
+			config->format = FORMAT_RAW;
+			break;
+		case OPT_BMP:
+			modified = 1;
+			MSG("Setting output format to BMP, quality");
+			config->format = FORMAT_BMP;
+			break;
 		}
 	}
 	
@@ -1292,8 +1306,8 @@ int fswc_getopts(fswebcam_config_t *config, int argc, char *argv[])
 #ifdef HAVE_WEBP
 		{"webp",            required_argument, 0, OPT_WEBP},
 #endif
-        {"raw",             required_argument, 0, OPT_RAW},
-        {"bmp",             required_argument, 0, OPT_BMP},
+        {"raw",             no_argument, 0, OPT_RAW},
+        {"bmp",             no_argument, 0, OPT_BMP},
 		{"save",            required_argument, 0, OPT_SAVE},
 		{"exec",            required_argument, 0, OPT_EXEC},
 		{0, 0, 0, 0}
