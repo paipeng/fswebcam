@@ -41,6 +41,8 @@
 #define FORMAT_JPEG (0)
 #define FORMAT_PNG  (1)
 #define FORMAT_WEBP (2)
+#define FORMAT_RAW  (3)
+#define FORMAT_BMP  (4)
 
 
 
@@ -336,9 +338,10 @@ int fswc_output(fswebcam_config_t *config, char *name, s2icodeimage *image)
 	}
 	
 	/* Write the compressed image. */
-    /*
+    
 	switch(config->format)
 	{
+#if 0
 	case FORMAT_JPEG:
 		MSG("Writing JPEG image to '%s'.", filename);
 		gdImageJpeg(im, f, config->compression);
@@ -355,8 +358,17 @@ int fswc_output(fswebcam_config_t *config, char *name, s2icodeimage *image)
 		gdImageWebpEx(im, f, config->compression);
 		break;
 #endif
+#endif
+        case FORMAT_RAW:
+            MSG("Writing RAW image to '%s'.", filename);
+            MSG("image size: %d-%d ", image->width, image->height);
+            break;
+        case FORMAT_BMP:
+            MSG("Writing BMP image to '%s'.", filename);
+            MSG("image size: %d-%d ", image->width, image->height);
+            break;
 	}
-     */
+     
 	
 	if(f != stdout) fclose(f);
 	
@@ -408,6 +420,7 @@ int fswc_grab(fswebcam_config_t *config)
 	uint32_t x, y;
 	avgbmp_t *abitmap, *pbitmap;
 	//gdImage *image, *original;
+    s2icodeimage *codeimage;
     uint8_t modified;
 	src_t src;
 	
@@ -439,13 +452,17 @@ int fswc_grab(fswebcam_config_t *config)
 	config->height = src.height;
 	
 	/* Allocate memory for the average bitmap buffer. */
-	abitmap = calloc(config->width * config->height * 3, sizeof(avgbmp_t));
-	if(!abitmap)
+    abitmap = calloc(config->width * config->height * 3, sizeof(avgbmp_t));
+    if(!abitmap)
 	{
 		ERROR("Out of memory.");
 		return(-1);
 	}
-	
+    codeimage = (s2icodeimage*) malloc(sizeof(s2icodeimage));
+    codeimage->data = calloc(config->width * config->height * 3, sizeof(avgbmp_t));
+    codeimage->width = config->width;
+    codeimage->height = config->height;
+    
 	if(config->frames == 1) HEAD("--- Capturing frame...");
 	else HEAD("--- Capturing %i frames...", config->frames);
 	
@@ -567,14 +584,20 @@ int fswc_grab(fswebcam_config_t *config)
 	for(y = 0; y < config->height; y++)
 		for(x = 0; x < config->width; x++)
 		{
+#if 0
 			int px = x;
 			int py = y;
 			int colour;
-			
+
 			colour  = (*(pbitmap++) / config->frames) << 16;
 			colour += (*(pbitmap++) / config->frames) << 8;
 			colour += (*(pbitmap++) / config->frames);
-			
+#endif
+			codeimage->data[x + y*codeimage->width] = (*(pbitmap++) / config->frames);
+            codeimage->data[x + y*codeimage->width+1] = (*(pbitmap++) / config->frames);
+            codeimage->data[x + y*codeimage->width+2] = (*(pbitmap++) / config->frames);
+
+            
 			//gdImageSetPixel(original, px, py, colour);
 		}
 	
@@ -616,7 +639,7 @@ int fswc_grab(fswebcam_config_t *config)
 	config->underlay     = NULL;
 	config->overlay      = NULL;
 	config->filename     = NULL;
-	config->format       = FORMAT_JPEG;
+	config->format       = FORMAT_RAW;
 	config->compression  = -1;
 	
 	modified = 1;
@@ -631,7 +654,7 @@ int fswc_grab(fswebcam_config_t *config)
 		{
 		case 1: /* A non-option argument: a filename. */
 		case OPT_SAVE:
-			//fswc_output(config, options, image);
+			fswc_output(config, options, codeimage);
 			modified = 0;
 			break;
 		case OPT_EXEC:
@@ -820,6 +843,8 @@ int fswc_grab(fswebcam_config_t *config)
 		}
 	}
 	
+    free(codeimage->data);
+    free(codeimage);
 	//gdImageDestroy(image);
 	//gdImageDestroy(original);
 	
