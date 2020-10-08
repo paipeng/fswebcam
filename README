@@ -20,3 +20,4 @@ make install
 It's only requirements are that the GD library be installed with JPEG, PNG
 and FreeType support.
 
+This modification version has removed the requirement of the GD library and only works for dump raw pixel data into a file or using a BMP (not included) library for storing into a BMP format
